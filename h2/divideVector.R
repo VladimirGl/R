@@ -1,5 +1,5 @@
 DivideVector <- function(vect, n) {
-	return(split(vect, n))
+	return(split(vect, 1:n))
 }
 
 PositiveEqualSums <- function(vect, n) {
