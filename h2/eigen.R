@@ -5,23 +5,25 @@ maxEigen <- function(m) {
     print("matrix is not square")
     return()
   }
+  
+  if (!isSymmetric(m)) {
+    print("matrix is not symmetric")
+    return()
+   }
 
   myEps <- sqrt(.Machine$double.eps)
-  an <- m
   x <- rnorm(nrow(m))
 
-  vect <- an %*% x
+  vect <- m %*% x
   vOne <- (vect) / norm(vect)
 
-  an <- an %*% m
-  vect <- an %*% x
+  vect <- m %*% vect
   vTwo <- (vect) / norm(vect)
 
-  while (((norm(vTwo - vOne) > myEps)) & (!all(vTwo == 0))) {    
+  while (norm(vTwo - vOne) > myEps) {    
     vOne <- vTwo
 
-    an <- an %*% m
-    vect <- an %*% x
+    vect <- m %*% vect
     vTwo <- (vect) / norm(vect)
   }
 
@@ -30,7 +32,7 @@ maxEigen <- function(m) {
 
   eigenList <- list("vect" = as.vector(eigenVect), "val" = mean(eigenVal))
 
-  return(eigenList)
+  eigenList
 }
 
 a <- matrix(rnorm(n^2), n, n)

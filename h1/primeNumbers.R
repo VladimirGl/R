@@ -1,28 +1,26 @@
-max <- 1000000
+max <- 12345
 
 sieveOfEratosthenes <- function(maxNumber) {
-  arr <- rep(T, maxNumber)
+  arr <- rep(TRUE, maxNumber)
+  arr[1] = FALSE
 
   maxSqrt <- sqrt(maxNumber)
 
   for (i in 2:maxSqrt) {
-    if (arr[i] == T) {
-      for (j in seq(i^2, maxNumber, by = i)) {
-	arr[j] <- F
+    if (arr[i] == TRUE) {
+      if (i^2 < maxNumber) {
+	arr[seq(i^2, maxNumber, by = i)] <- FALSE
       }
     }
   }
 
-  return(arr)
+  arr
 }
 
-printPrimes <- function(arr, maxNumber) {
-  for (i in 1:maxNumber) {
-    if (arr[i] == T) {
-      print(i)
-    }
-  }
+printPrimes <- function(arr) {
+  print(which(arr == TRUE))
 }
 
 b <- sieveOfEratosthenes(max)
-printPrimes(b, max)
+printPrimes(b)
+

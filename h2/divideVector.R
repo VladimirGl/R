@@ -1,5 +1,5 @@
 DivideVector <- function(vect, n) {
-	return(split(vect, 1:n))
+	split(vect, 1:n)
 }
 
 PositiveEqualSums <- function(vect, n) {
@@ -37,7 +37,7 @@ PositiveEqualSums <- function(vect, n) {
 		j <- j + 1
 	}
 	
-	return(vectList)
+	vectList
 }
 
 # нормально работает для n << length(vect)
@@ -56,7 +56,7 @@ EqualSumVectors <- function(vect, n) {
 		finalList[[i]] <- append(positiveList[[i]], -negativeList[[i]])
 	}
 	
-	return(finalList)
+	finalList
 }
 
 PrintSums <- function(vecList, n) {
@@ -66,7 +66,7 @@ PrintSums <- function(vecList, n) {
 		sumVec <- append(sumVec, sum(vecList[[i]]))
 	}
 	
-	return(sumVec)
+	sumVec
 }
 
 a <- rnorm(1000)

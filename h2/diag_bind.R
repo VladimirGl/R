@@ -1,7 +1,7 @@
 
 zeros <- function(nrow, ncol) {
   m <- matrix(0, nrow, ncol)
-  return(m)
+  m
 }
 
 diagBindTwo <- function(m1, m2) {
@@ -10,26 +10,20 @@ diagBindTwo <- function(m1, m2) {
   
   diagMatrix <- rbind(cbind(m1, m1Zeros), cbind(m2Zeros, m2))
 
-  return(diagMatrix)
+  diagMatrix
 }
 
 diagBind <- function(...) {
   mNumber <- nargs()
-  mList <- list(...)
+  mDots <- list(...)
 
-  diagMatrix <- mList[[1]]
+  diagMatrix <- mDots[[1]]
 
-  for (i in 2:mNumber) {
-    diagMatrix <- diagBindTwo(diagMatrix, mList[[i]])
+  if (length(mDots) != 1) {
+    for (i in 2:mNumber) {
+      diagMatrix <- diagBindTwo(diagMatrix, mDots[[i]])
+    }
   }
 
-  return(diagMatrix)
+  diagMatrix
 }
-
-m1 <- matrix(1:9, 3, 3)
-m2 <- matrix(1:16, 4, 4)
-m3 <- matrix(9:1, 3, 3)
-m4 <- matrix(1, 2, 2)
-
-m5 <- diagBind(m1, m2, m3, m4)
-m5

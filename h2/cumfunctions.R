@@ -1,49 +1,49 @@
 Skewness <- function(vect) {
-	vm <- vect - mean(vect)
-	vsd <- sd(vect)
+	skewness <- NaN
 
-	skewness <- (sum(vm ^ 3) / n) / (vsd ^ 3)
-	return(skewness)
+	if (length(vect) != 1) {
+		skewness <- mean((vect - mean(vect)) ^ 3) / sd(vect)^3
+	}
+
+	skewness
 }
 
 Kurtosis <- function(vect) {
-	vm <- vect - mean(vect)
-	vsd <- sd(vect)
-
-	kurtosis <- ((sum(vm ^ 4) / n) / (vsd ^ 4)) - 3
-	return(kurtosis)
+	kurtosis <- NaN
+	
+	if (length(vect) != 1) {
+		kurtosis <- mean((vect - mean(vect)) ^ 4) / sd(vect)^4 - 3
+	}
+	
+	kurtosis
 }
 
 Cumfunction <- function(vect, func) {
-	counter <- 1
-	cumVector <- vect[1]
-
-	cumFuncVector <- func(cumVector)
+	cumFuncVector <- func(vect[1])
 
 	for (i in 2:length(vect)) {
-		cumVector <- append(cumVector, vect[i])
-		cumFuncVector <- append(cumFuncVector, func(cumVector))
+		cumFuncVector <- append(cumFuncVector, func(vect[1:i]))
 	}
 
-	return(cumFuncVector)
+	cumFuncVector
 }
 
 Cummedian <- function(vect) {
-	return(Cumfunction(vect, median))
+	Cumfunction(vect, median)
 }
 
 Cumsd <- function(vect) {
-	return(Cumfunction(vect, sd))
+	Cumfunction(vect, sd)
 }
 
 Cummean <- function(vect) {
-	return(Cumfunction(vect, mean))
+	Cumfunction(vect, mean)
 }
 
 Cumskewness <- function(vect) {
-	return(Cumfunction(vect, Skewness))
+	Cumfunction(vect, Skewness)
 }
 
 Cumkurtosis <- function(vect) {
-	return(Cumfunction(vect, Kurtosis))
+	Cumfunction(vect, Kurtosis)
 }
